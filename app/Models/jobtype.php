@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class jobtype extends Model
 {
-    //
+    protected$fillable = ['name', 'desc'];
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\jobtype;
+use Exception;
 use Illuminate\Http\Request;
 
 class jobtypeController extends Controller
@@ -14,17 +15,19 @@ class jobtypeController extends Controller
 
     function create(Request $req)
     {
-        $data=new jobtype;
-        $data->name=$req->name;
-        $data->desc=$req->desc;
-        $result=$data->save();
-        if($result)
-        {
-            return ["Result"=>"Data has been saved"];
-        }
-        else
-        {
-            return ["Result"=>"Operation Failed"];
-        }
+       try {
+        $data = jobtype::create($req->all());
+        return response()->json([
+            "Status"=>true,
+            "Massege"=>"Data is inserted",
+            "Data"=>$data
+         ]);
+       } catch (Exception $e) {
+         return response()->json([
+            "Status"=>false,
+            "Massege"=>"Data is not inserted",
+            "Erroe"=>$e->getMessage()
+         ]);
+       }
     }
 }
