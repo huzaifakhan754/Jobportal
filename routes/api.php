@@ -16,3 +16,4 @@ Route::get('/deleteUser/{id}', [AuthController::class, 'delete']);
 Route::get('/jobtype', [jobtypeController::class, 'jobtype']);
 Route::post('/jobtypeCreate', [jobtypeController::class, 'create']);
 Route::delete('/jobdel/{id}', [jobtypeController::class, 'delete']);
+Route::put('/jobupdate/{id}', [jobtypeController::class, 'update']);

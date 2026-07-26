@@ -50,12 +50,31 @@ class jobtypeController extends Controller
             jobtype::destroy($data->id);
             return response()->json([
                 "Status" => true,
-                "Massege" => "Data is Deleted",                
+                "Massege" => "Data is Deleted",
             ]);
         } catch (Exception $e) {
             return response()->json([
                 "Status" => false,
                 "Massege" => "Data is not inserted",
+                "Erroe" => $e->getMessage()
+            ]);
+        }
+    }
+
+    function update($id, Request $req)
+    {
+        try {
+            $data = jobtype::findOrfail($id);
+            $data->update($req->all());
+            return response()->json([
+                "Status" => true,
+                "Massege" => "Data is Updated",
+                "Data"=>$data
+            ]);
+        } catch (Exception $e) {
+            return response()->json([
+                "Status" => false,
+                "Massege" => "Data is not Updated",
                 "Erroe" => $e->getMessage()
             ]);
         }
